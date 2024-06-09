@@ -23,6 +23,7 @@ class Match_Arena {
      * @returns {Player} - The winner of the battle.
      */
     commenceFight() {
+        let winner;
         let [attacker, defender] =
             this.player1.health <= this.player2.health
                 ? [this.player1, this.player2]
@@ -30,10 +31,23 @@ class Match_Arena {
 
         while (this.player1.isAlive() && this.player2.isAlive()) {
             this.battleRound(attacker, defender);
+
+            if (!defender.isAlive() && !attacker.isAlive()) {
+                // Both players die in the same round, decide based on initial health
+                winner =
+                    this.player1.health >= this.player2.health
+                        ? this.player1
+                        : this.player2;
+            }
+
+            if (!defender.isAlive()) break;
+
             [attacker, defender] = [defender, attacker]; // swap roles after each round
         }
 
-        const winner = this.player1.isAlive() ? this.player1 : this.player2;
+        if (!winner) {
+            winner = this.player1.isAlive() ? this.player1 : this.player2;
+        }
         console.log(
             `The winner is ${winner.name} with ${winner.health} health remaining.`
         );
