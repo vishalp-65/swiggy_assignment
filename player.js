@@ -26,7 +26,7 @@ class Player {
      * Reduces the player's health by the specified damage amount.
      * @param {number} damage - The amount of damage to apply.
      */
-    applyDamge(damage) {
+    applyDamage(damage) {
         this.health = Math.max(this.health - damage, 0);
     }
 
