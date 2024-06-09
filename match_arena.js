@@ -8,8 +8,10 @@ class Match_Arena {
      */
 
     constructor(player1, player2) {
-        if (!player1 || !player2) {
-            throw new Error("Both players must be defined");
+        if (!(player1 instanceof Player) || !(player2 instanceof Player)) {
+            throw new Error(
+                "Both players must be instances of the Player class"
+            );
         }
         this.player1 = player1;
         this.player2 = player2;

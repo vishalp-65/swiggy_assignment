@@ -8,6 +8,19 @@ class Player {
      */
 
     constructor(name, health, strength, attack) {
+        if (typeof name !== "string" || name.trim() === "") {
+            throw new Error("Name must be a non-empty string");
+        }
+        if (!Number.isInteger(health) || health <= 0) {
+            throw new Error("Health must be a positive integer");
+        }
+        if (!Number.isInteger(strength) || strength <= 0) {
+            throw new Error("Strength must be a positive integer");
+        }
+        if (!Number.isInteger(attack) || attack <= 0) {
+            throw new Error("Attack must be a positive integer");
+        }
+
         this.name = name;
         this.health = health;
         this.strength = strength;
@@ -27,6 +40,10 @@ class Player {
      * @param {number} damage - The amount of damage to apply.
      */
     applyDamage(damage) {
+        if (!Number.isInteger(damage) || damage < 0) {
+            throw new Error("Damage must be a non-negative integer");
+        }
+
         this.health = Math.max(this.health - damage, 0);
     }
 
